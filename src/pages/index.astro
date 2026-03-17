@@ -1,0 +1,97 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base>
+  <div class="container">
+    <section class="hero">
+      <p class="label">UESC Marathon · Tau Ceti IV · 2794</p>
+      <h1>Signals from<br />Tau Ceti</h1>
+      <p class="tagline">
+        Transmissions intercepted. Colony logs recovered.<br />
+        What the terminals remember, we record here.
+      </p>
+    </section>
+
+    <section class="index-grid">
+      <a href="entries/" class="card">
+        <h2>Entries</h2>
+        <p>Long-form writing — analysis, lore essays, and personal record.</p>
+      </a>
+      <a href="fragments/" class="card">
+        <h2>Fragments</h2>
+        <p>Short transmissions. Lore scraps, stray observations, raw signal.</p>
+      </a>
+      <a href="moodboard/" class="card">
+        <h2>Moodboard</h2>
+        <p>Visual reference. The look and feel of Marathon's universe.</p>
+      </a>
+      <a href="about/" class="card">
+        <h2>About</h2>
+        <p>What this place is and why it exists.</p>
+      </a>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .hero {
+    padding-block: 5rem 4rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 4rem;
+  }
+
+  .label {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+
+  h1 {
+    color: var(--text);
+    margin-bottom: 1.5rem;
+  }
+
+  .tagline {
+    color: var(--text-dim);
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .index-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1px;
+    border: 1px solid var(--border);
+  }
+
+  .card {
+    display: block;
+    padding: 2rem;
+    background: var(--surface);
+    border: none;
+    color: var(--text);
+    transition: background var(--transition);
+  }
+
+  .card:hover {
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  .card h2 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .card p {
+    font-size: 0.875rem;
+    color: var(--text-dim);
+  }
+</style>

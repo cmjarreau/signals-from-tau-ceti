@@ -1,0 +1,38 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base title="Moodboard">
+  <div class="container">
+    <header class="page-header">
+      <h1>Moodboard</h1>
+      <p>Visual reference for Marathon's aesthetic universe.</p>
+    </header>
+
+    <p class="empty">Images incoming. Signal establishing.</p>
+  </div>
+</Base>
+
+<style>
+  .page-header {
+    padding-block: 3rem 2.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 3rem;
+  }
+
+  .page-header h1 {
+    margin-bottom: 0.5rem;
+  }
+
+  .page-header p {
+    color: var(--text-dim);
+    font-size: 0.875rem;
+    font-family: var(--mono);
+  }
+
+  .empty {
+    color: var(--text-dim);
+    font-family: var(--mono);
+    font-size: 0.875rem;
+  }
+</style>

@@ -1,0 +1,110 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Signals from Tau Ceti',
+  description = 'A record of transmissions. Marathon lore, worldbuilding, and fragments.',
+} = Astro.props;
+
+const base = import.meta.env.BASE_URL;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <title>{title === 'Signals from Tau Ceti' ? title : `${title} — Signals from Tau Ceti`}</title>
+  </head>
+  <body>
+    <header>
+      <nav class="container">
+        <a href={base} class="site-title">signals-from-tau-ceti</a>
+        <ul role="list">
+          <li><a href={`${base}entries/`}>Entries</a></li>
+          <li><a href={`${base}fragments/`}>Fragments</a></li>
+          <li><a href={`${base}moodboard/`}>Moodboard</a></li>
+          <li><a href={`${base}about/`}>About</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer>
+      <div class="container">
+        <span class="text-dim">© {new Date().getFullYear()} — all transmissions logged</span>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  header {
+    border-bottom: 1px solid var(--border);
+    padding-block: 1rem;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .site-title {
+    font-family: var(--mono);
+    font-size: 0.875rem;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+    flex-shrink: 0;
+  }
+
+  .site-title:hover {
+    color: var(--accent);
+  }
+
+  ul {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    margin-left: auto;
+  }
+
+  ul a {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+  }
+
+  ul a:hover {
+    color: var(--text);
+  }
+
+  main {
+    padding-block: 4rem;
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding-block: 1.5rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+  }
+
+  .text-dim {
+    color: var(--text-dim);
+  }
+</style>

@@ -1,0 +1,52 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+
+<Base title="About">
+  <div class="container">
+    <header class="page-header">
+      <h1>About</h1>
+    </header>
+
+    <div class="prose">
+      <p>
+        This is a personal site about Marathon — Bungie's 1994 FPS and the universe it built.
+        It's a place to think out loud about what that game means, what its world holds,
+        and what it still has to say.
+      </p>
+      <p>
+        <em>Signals from Tau Ceti</em> is named for the destination of the UESC Marathon,
+        a converted Martian moon repurposed as a colony ship. The game begins when it arrives.
+      </p>
+      <p>
+        Not a wiki. Not an archive. A record.
+      </p>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .page-header {
+    padding-block: 3rem 2.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 3rem;
+  }
+
+  .prose {
+    max-width: var(--measure);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .prose p {
+    color: var(--text);
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .prose em {
+    color: var(--accent);
+    font-style: normal;
+  }
+</style>

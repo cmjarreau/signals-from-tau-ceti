@@ -1,0 +1,103 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const entries = (await getCollection('entries')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<Base title="Entries">
+  <div class="container">
+    <header class="page-header">
+      <h1>Entries</h1>
+      <p>Long-form writing.</p>
+    </header>
+
+    {entries.length === 0 ? (
+      <p class="empty">No entries yet. Signal lost.</p>
+    ) : (
+      <ol role="list" class="entry-list">
+        {entries.map(entry => (
+          <li>
+            <a href={`entries/${entry.id}/`} class="entry-link">
+              <time datetime={entry.data.date.toISOString()}>
+                {entry.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+              </time>
+              <span class="entry-title">{entry.data.title}</span>
+              {entry.data.description && <p class="entry-desc">{entry.data.description}</p>}
+            </a>
+          </li>
+        ))}
+      </ol>
+    )}
+  </div>
+</Base>
+
+<style>
+  .page-header {
+    padding-block: 3rem 2.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 3rem;
+  }
+
+  .page-header h1 {
+    margin-bottom: 0.5rem;
+  }
+
+  .page-header p {
+    color: var(--text-dim);
+    font-size: 0.875rem;
+    font-family: var(--mono);
+  }
+
+  .empty {
+    color: var(--text-dim);
+    font-family: var(--mono);
+    font-size: 0.875rem;
+  }
+
+  .entry-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .entry-link {
+    display: grid;
+    grid-template-columns: 10rem 1fr;
+    grid-template-rows: auto auto;
+    gap: 0.25rem 1.5rem;
+    padding-block: 1.5rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    align-items: baseline;
+  }
+
+  .entry-link:hover .entry-title {
+    color: var(--accent);
+  }
+
+  time {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+    grid-row: 1;
+  }
+
+  .entry-title {
+    font-size: 1rem;
+    transition: color var(--transition);
+    grid-row: 1;
+  }
+
+  .entry-desc {
+    font-size: 0.875rem;
+    color: var(--text-dim);
+    grid-column: 2;
+    grid-row: 2;
+    max-width: 55ch;
+  }
+</style>
