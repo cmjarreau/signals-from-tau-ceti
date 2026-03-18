@@ -11,8 +11,8 @@ const entries = defineCollection({
   }),
 });
 
-const fragments = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/fragments' }),
+const transmissions = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/transmissions' }),
   schema: z.object({
     title: z.string().optional(),
     date: z.coerce.date(),
@@ -20,4 +20,4 @@ const fragments = defineCollection({
   }),
 });
 
-export const collections = { entries, fragments };
+export const collections = { entries, transmissions };

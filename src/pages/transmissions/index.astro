@@ -2,23 +2,23 @@
 import Base from '../../layouts/Base.astro';
 import { getCollection, render } from 'astro:content';
 
-const fragments = (await getCollection('fragments')).sort(
+const transmissions = (await getCollection('transmissions')).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
 ---
 
-<Base title="Fragments">
+<Base title="Transmissions">
   <div class="container">
     <header class="page-header">
-      <h1>Fragments</h1>
-      <p>Short transmissions. Raw signal.</p>
+      <h1>Transmissions</h1>
+      <p>Short takes. Raw signal.</p>
     </header>
 
-    {fragments.length === 0 ? (
-      <p class="empty">No fragments recovered.</p>
+    {transmissions.length === 0 ? (
+      <p class="empty">No transmissions recovered.</p>
     ) : (
       <div class="fragment-grid">
-        {fragments.map(async (fragment) => {
+        {transmissions.map(async (fragment) => {
           const { Content } = await render(fragment);
           return (
             <article class="fragment">

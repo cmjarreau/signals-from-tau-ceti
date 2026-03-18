@@ -6,6 +6,7 @@ import Base from '../../layouts/Base.astro';
   <div class="container">
     <header class="page-header">
       <h1>About</h1>
+      <p class="subtext">What Marathon means to me.</p>
     </header>
 
     <div class="prose">
@@ -30,6 +31,13 @@ import Base from '../../layouts/Base.astro';
     padding-block: 3rem 2.5rem;
     border-bottom: 1px solid var(--border);
     margin-bottom: 3rem;
+  }
+
+  .subtext {
+    color: var(--text-dim);
+    font-size: 0.875rem;
+    font-family: var(--mono);
+    margin-top: 0.5rem;
   }
 
   .prose {

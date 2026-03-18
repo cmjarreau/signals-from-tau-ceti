@@ -25,15 +25,10 @@ const base = import.meta.env.BASE_URL;
   </head>
   <body>
     <header>
-      <nav class="container">
-        <a href={base} class="site-title">signals-from-tau-ceti</a>
-        <ul role="list">
-          <li><a href={`${base}entries/`}>Entries</a></li>
-          <li><a href={`${base}fragments/`}>Fragments</a></li>
-          <li><a href={`${base}moodboard/`}>Moodboard</a></li>
-          <li><a href={`${base}about/`}>About</a></li>
-        </ul>
-      </nav>
+      <div class="header-bar container">
+        <span>CYBERACME 802.11 // NEURO.FILTER ACTIVE</span>
+        <span>TAU CETI IV · 2794.{new Date().getFullYear()}</span>
+      </div>
     </header>
 
     <main>
@@ -42,7 +37,10 @@ const base = import.meta.env.BASE_URL;
 
     <footer>
       <div class="container">
-        <span class="text-dim">© {new Date().getFullYear()} — all transmissions logged</span>
+        <div class="footer-inner">
+          <span>// END OF TRANSMISSION</span>
+          <span>ALL SIGNALS LOGGED · {new Date().getFullYear()}</span>
+        </div>
       </div>
     </footer>
   </body>
@@ -51,45 +49,16 @@ const base = import.meta.env.BASE_URL;
 <style>
   header {
     border-bottom: 1px solid var(--border);
-    padding-block: 1rem;
   }
 
-  nav {
+  .header-bar {
     display: flex;
     align-items: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-  }
-
-  .site-title {
-    font-family: var(--mono);
-    font-size: 0.875rem;
+    justify-content: space-between;
+    padding-block: 0.9rem;
+    font-size: 0.65rem;
     color: var(--text-dim);
-    letter-spacing: 0.04em;
-    flex-shrink: 0;
-  }
-
-  .site-title:hover {
-    color: var(--accent);
-  }
-
-  ul {
-    display: flex;
-    gap: 1.5rem;
-    list-style: none;
-    margin-left: auto;
-  }
-
-  ul a {
-    font-family: var(--mono);
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--text-dim);
-  }
-
-  ul a:hover {
-    color: var(--text);
+    letter-spacing: 0.08em;
   }
 
   main {
@@ -98,13 +67,14 @@ const base = import.meta.env.BASE_URL;
 
   footer {
     border-top: 1px solid var(--border);
-    padding-block: 1.5rem;
-    font-family: var(--mono);
-    font-size: 0.75rem;
+    padding-block: 1.25rem;
+    font-size: 0.65rem;
     color: var(--text-dim);
   }
 
-  .text-dim {
-    color: var(--text-dim);
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    letter-spacing: 0.1em;
   }
 </style>
