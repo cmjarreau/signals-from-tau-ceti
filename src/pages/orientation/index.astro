@@ -1,15 +1,50 @@
 ---
 import Base from '../../layouts/Base.astro';
+const base = import.meta.env.BASE_URL;
 ---
 
 <Base title="Orientation">
   <div class="container">
     <header class="page-header">
+      <p class="recv">// BRIEFING DOCUMENT · CLEARANCE LEVEL: OPEN</p>
       <h1>Orientation</h1>
-      <p class="subtext">How to play Marathon. What to know before you start.</p>
+      <p class="subtext">Introduction to Marathon gameplay.</p>
     </header>
 
-    <p class="empty">Briefing incoming.</p>
+    <nav class="section-grid">
+      <a href={`${base}orientation/shells/`} class="section-card">
+        <span class="index">01</span>
+        <div class="section-body">
+          <h2>Shells</h2>
+          <p>Pick a class that fits your playstyle.</p>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+      <a href={`${base}orientation/factions/`} class="section-card">
+        <span class="index">02</span>
+        <div class="section-body">
+          <h2>Factions</h2>
+          <p>The corporations want their assets back, and you are the retrieval mechanism.</p>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+      <a href={`${base}orientation/weapons/`} class="section-card">
+        <span class="index">03</span>
+        <div class="section-body">
+          <h2>Weapons</h2>
+          <p>Armament catalog.</p>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+      <a href={`${base}orientation/armor-mods/`} class="section-card">
+        <span class="index">04</span>
+        <div class="section-body">
+          <h2>Armor Mods</h2>
+          <p>Tactical augmentations.</p>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+    </nav>
   </div>
 </Base>
 
@@ -20,19 +55,82 @@ import Base from '../../layouts/Base.astro';
     margin-bottom: 3rem;
   }
 
+  .recv {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    margin-bottom: 1rem;
+  }
+
   .page-header h1 {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
   }
 
   .subtext {
+    font-size: 0.75rem;
     color: var(--text-dim);
-    font-size: 0.875rem;
-    font-family: var(--mono);
+    letter-spacing: 0.06em;
   }
 
-  .empty {
+  .section-grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .section-card {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding-block: 1.75rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    transition: background var(--transition);
+  }
+
+  .section-card:hover {
+    color: var(--text);
+  }
+
+  .section-card:hover .arrow {
+    color: var(--green);
+    transform: translateX(4px);
+  }
+
+  .section-card:hover h2 {
+    color: var(--green);
+  }
+
+  .index {
+    font-size: 0.65rem;
     color: var(--text-dim);
-    font-family: var(--mono);
-    font-size: 0.875rem;
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+    width: 2rem;
+  }
+
+  .section-body {
+    flex: 1;
+  }
+
+  h2 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-bright);
+    margin-bottom: 0.4rem;
+    transition: color var(--transition);
+  }
+
+  .section-body p {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  .arrow {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    flex-shrink: 0;
+    transition: color var(--transition), transform var(--transition);
   }
 </style>

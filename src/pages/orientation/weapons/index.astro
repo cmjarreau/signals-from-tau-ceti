@@ -1,15 +1,16 @@
 ---
-import Base from '../../layouts/Base.astro';
+import Base from '../../../layouts/Base.astro';
 ---
 
-<Base title="Entries">
+<Base title="WEAPONS">
   <div class="container">
     <header class="page-header">
-      <p class="recv">// FIELD NOTES</p>
-      <h1>Entries</h1>
-      <p class="subtext">Field notes.</p>
+      <p class="recv">// ORIENTATION · 03 · WEAPONS</p>
+      <h1>WEAPONS</h1>
+      <p class="subtext">Armament catalog.</p>
     </header>
     <p class="empty">DATA PENDING — transmission incomplete.</p>
+    <div class="back"><a href="../">← Orientation</a></div>
   </div>
 </Base>
 
@@ -35,5 +36,14 @@ import Base from '../../layouts/Base.astro';
     font-size: 0.75rem;
     color: var(--text-dim);
     letter-spacing: 0.08em;
+    margin-bottom: 3rem;
   }
+  .back {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    border-top: 1px solid var(--border);
+    padding-top: 2rem;
+  }
+  .back a { color: var(--text-dim); }
+  .back a:hover { color: var(--green); }
 </style>

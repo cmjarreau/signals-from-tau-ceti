@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+const base = import.meta.env.BASE_URL;
 ---
 
 <Base>
@@ -12,19 +13,19 @@ import Base from '../layouts/Base.astro';
     </section>
 
     <section class="index-grid">
-      <a href="orientation/" class="card">
+      <a href={`${base}orientation/`} class="card">
         <h2>Orientation</h2>
-        <p>How to play Marathon. What to know before you start.</p>
+        <p>Introduction to Marathon gameplay.</p>
       </a>
-      <a href="entries/" class="card">
+      <a href={`${base}entries/`} class="card">
         <h2>Entries</h2>
-        <p>Long-form writing — analysis, lore essays, and personal record.</p>
+        <p>Field notes.</p>
       </a>
-      <a href="transmissions/" class="card">
+      <a href={`${base}transmissions/`} class="card">
         <h2>Transmissions</h2>
-        <p>Short takes. Lore scraps, stray observations, raw signal.</p>
+        <p>Signal log.</p>
       </a>
-      <a href="about/" class="card">
+      <a href={`${base}about/`} class="card">
         <h2>About</h2>
         <p>What Marathon means to me.</p>
       </a>
