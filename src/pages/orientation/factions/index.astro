@@ -9,7 +9,23 @@ import Base from '../../../layouts/Base.astro';
       <h1>FACTIONS</h1>
       <p class="subtext">The corporations want their assets back, and you are the retrieval mechanism.</p>
     </header>
-    <p class="empty">DATA PENDING — transmission incomplete.</p>
+
+    <div class="faction">
+      <div class="faction-header">
+        <p class="faction-id">FACTION · 01</p>
+        <h2>CYBERACME</h2>
+        <p class="faction-sub">Neural interface systems. Neuro-filter tech. Deep signal interception.</p>
+      </div>
+      <div class="video-wrap">
+        <iframe
+          src="https://www.youtube.com/embed/-1q4kA4E4i4"
+          title="CYBERACME"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+
     <div class="back"><a href="../">← Orientation</a></div>
   </div>
 </Base>
@@ -32,17 +48,52 @@ import Base from '../../../layouts/Base.astro';
     color: var(--text-dim);
     letter-spacing: 0.06em;
   }
-  .empty {
-    font-size: 0.75rem;
-    color: var(--text-dim);
-    letter-spacing: 0.08em;
-    margin-bottom: 3rem;
+
+  .faction {
+    margin-bottom: 4rem;
   }
+  .faction-header {
+    margin-bottom: 1.5rem;
+  }
+  .faction-id {
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+    margin-bottom: 0.4rem;
+  }
+  .faction-header h2 {
+    font-size: 1.4rem;
+    letter-spacing: 0.12em;
+    color: var(--green);
+    margin-bottom: 0.4rem;
+  }
+  .faction-sub {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+  }
+
+  .video-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 1px solid var(--border);
+    background: #000;
+  }
+  .video-wrap iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
   .back {
     font-size: 0.7rem;
     letter-spacing: 0.1em;
     border-top: 1px solid var(--border);
     padding-top: 2rem;
+    margin-top: 2rem;
   }
   .back a { color: var(--text-dim); }
   .back a:hover { color: var(--green); }
