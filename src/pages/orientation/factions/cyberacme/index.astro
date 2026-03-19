@@ -23,7 +23,7 @@ import Base from '../../../../layouts/Base.astro';
         <p id="t5" class="output hidden spacer"><span class="ttype"></span></p>
         <p id="t6" class="output hidden"><span class="ttype"></span></p>
         <p id="t7" class="output hidden spacer"><span class="ttype"></span></p>
-        <p id="t8" class="output hidden"><span class="ttype"></span><span class="cursor"></span></p>
+        <p id="t8" class="output hidden"><span class="ttype"></span><span class="cursor" id="end-cursor" style="visibility:hidden"></span></p>
       </div>
     </div>
 
@@ -125,7 +125,13 @@ import Base from '../../../../layouts/Base.astro';
   }
 
   function runSequence(index = 0) {
-    if (index >= lines.length) return;
+    if (index >= lines.length) {
+      const cursor = document.getElementById('end-cursor');
+      const lastType = document.querySelector(`#t${lines.length - 1} .ttype`);
+      lastType.appendChild(cursor);
+      cursor.style.visibility = 'visible';
+      return;
+    }
     const el = document.querySelector(`#t${index} .ttype`);
     if (!el) return;
     typeLine(el, lines[index], () => {
