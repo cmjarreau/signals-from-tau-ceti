@@ -1,5 +1,10 @@
 ---
 import Base from '../../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+const base = import.meta.env.BASE_URL;
+
+const factions = (await getCollection('factions'))
+  .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
 ---
 
 <Base title="FACTIONS">
@@ -11,15 +16,17 @@ import Base from '../../../layouts/Base.astro';
     </header>
 
     <ul class="faction-list">
-      <li>
-        <a href="cyberacme/">
-          <span class="faction-id">01</span>
-          <span class="faction-name">CYBERACME</span>
-        </a>
-      </li>
+      {factions.map((faction, i) => (
+        <li>
+          <a href={`${base}orientation/factions/${faction.id}/`}>
+            <span class="faction-id">{String(i + 1).padStart(2, '0')}</span>
+            <span class="faction-name">{faction.id.toUpperCase()}</span>
+          </a>
+        </li>
+      ))}
     </ul>
 
-    <div class="back"><a href="../">← Orientation</a></div>
+    <div class="back"><a href={`${base}orientation/`}>← Orientation</a></div>
   </div>
 </Base>
 
@@ -48,9 +55,7 @@ import Base from '../../../layouts/Base.astro';
     margin: 0 0 4rem;
     border-top: 1px solid var(--border);
   }
-  .faction-list li {
-    border-bottom: 1px solid var(--border);
-  }
+  .faction-list li { border-bottom: 1px solid var(--border); }
   .faction-list a {
     display: flex;
     align-items: center;
@@ -60,7 +65,6 @@ import Base from '../../../layouts/Base.astro';
     color: var(--text);
   }
   .faction-list a:hover .faction-name { color: var(--green); }
-  .faction-list a:hover .faction-arrow { color: var(--green); }
   .faction-id {
     font-size: 0.6rem;
     letter-spacing: 0.12em;
@@ -70,11 +74,6 @@ import Base from '../../../layouts/Base.astro';
   .faction-name {
     font-size: 0.85rem;
     letter-spacing: 0.12em;
-    flex: 1;
-  }
-  .faction-arrow {
-    font-size: 0.8rem;
-    color: var(--text-dim);
   }
 
   .back {

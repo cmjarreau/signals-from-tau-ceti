@@ -1,5 +1,6 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
+import { z } from 'zod';
 
 const entries = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/entries' }),
@@ -20,4 +21,18 @@ const transmissions = defineCollection({
   }),
 });
 
-export const collections = { entries, transmissions };
+const factions = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/factions' }),
+  schema: z.object({
+    name: z.string(),
+    designator: z.string(),
+    role: z.string(),
+    classification: z.string(),
+    agent: z.string(),
+    image: z.string(),
+    subtext: z.string(),
+    order: z.number().optional(),
+  }),
+});
+
+export const collections = { entries, transmissions, factions };

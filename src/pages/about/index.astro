@@ -5,12 +5,16 @@ import Base from '../../layouts/Base.astro';
 <Base title="About">
   <div class="container">
     <header class="page-header">
+      <p class="recv">// PERSONAL LOG · CLEARANCE LEVEL: RESTRICTED</p>
       <h1>About</h1>
       <p class="subtext">What Marathon means to me.</p>
     </header>
 
     <div class="prose">
-      <p>It's all about what Marathon means to me. That's what all of this boils down to.</p>
+      <div class="terminal" id="contact-terminal">
+        <p><span class="prompt">C:\CONTACT&gt;</span><span class="ttype"></span></p>
+        <p class="output hidden"><span class="ttype"></span><span class="cursor" id="end-cursor" style="visibility:hidden"></span></p>
+      </div>
     </div>
   </div>
 </Base>
@@ -21,29 +25,78 @@ import Base from '../../layouts/Base.astro';
     border-bottom: 1px solid var(--border);
     margin-bottom: 3rem;
   }
-
-  .subtext {
+  .recv {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
     color: var(--text-dim);
-    font-size: 0.875rem;
-    font-family: var(--mono);
-    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .page-header h1 { margin-bottom: 0.4rem; }
+  .subtext {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
   }
 
   .prose {
     max-width: var(--measure);
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 2rem;
   }
-
-  .prose p {
+  .prose > p {
     color: var(--text);
     font-size: 1rem;
     line-height: 1.75;
   }
 
-  .prose em {
-    color: var(--accent);
-    font-style: normal;
+  .terminal {
+    background: #000;
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    font-size: 0.75rem;
+    line-height: 2;
+    color: var(--green);
   }
+  .terminal p { margin: 0; }
+  .prompt { opacity: 0.5; }
+  .output { padding-left: 0.5rem; }
+  .hidden { visibility: hidden; }
 </style>
+
+<script>
+  const lines = [
+    ' CONTACT.DAT',
+    'MAILTO: cmjarreau [at] gmail [dot] com',
+  ];
+
+
+  const speed = 18;
+  const lineDelay = 100;
+
+  function typeLine(el, text, done) {
+    el.closest('p')?.classList.remove('hidden');
+    let i = 0;
+    const tick = setInterval(() => {
+      el.textContent += text[i++];
+      if (i >= text.length) { clearInterval(tick); done?.(); }
+    }, speed);
+  }
+
+  function runSequence(index = 0) {
+    if (index >= lines.length) {
+      const cursor = document.getElementById('end-cursor');
+      const lastType = document.querySelectorAll('#contact-terminal .ttype')[lines.length - 1];
+      lastType.appendChild(cursor);
+      cursor.style.visibility = 'visible';
+      return;
+    }
+    const el = document.querySelectorAll('#contact-terminal .ttype')[index];
+    if (!el) return;
+    typeLine(el, lines[index], () => {
+      setTimeout(() => runSequence(index + 1), lineDelay);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => runSequence());
+</script>

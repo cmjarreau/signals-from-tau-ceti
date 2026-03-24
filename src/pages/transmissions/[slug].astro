@@ -1,0 +1,59 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+const base = import.meta.env.BASE_URL;
+
+export async function getStaticPaths() {
+  const transmissions = await getCollection('transmissions');
+  return transmissions.map(entry => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<Base title={entry.data.title ?? 'TRANSMISSION'}>
+  <article class="container">
+    <header class="entry-header">
+      <p class="recv-line">// RECV · TRANSMISSION · {entry.data.date.toISOString().slice(0,10).replace(/-/g,'.')}</p>
+      {entry.data.title && <h1>{entry.data.title}</h1>}
+    </header>
+
+    <div class="terminal-prose">
+      <Content />
+    </div>
+
+    <footer class="entry-footer">
+      <a href={`${base}transmissions/`}>← BACK TO TRANSMISSIONS</a>
+    </footer>
+  </article>
+</Base>
+
+<style>
+  .entry-header {
+    padding-block: 3rem 2.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 3rem;
+    max-width: var(--measure);
+  }
+  .recv-line {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    margin-bottom: 1rem;
+    opacity: 0.6;
+  }
+  .entry-header h1 { margin-bottom: 0.75rem; }
+  .entry-footer {
+    border-top: 1px solid var(--border);
+    margin-top: 4rem;
+    padding-top: 2rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+  }
+  .entry-footer a { color: var(--text-dim); }
+  .entry-footer a:hover { color: var(--green); }
+</style>

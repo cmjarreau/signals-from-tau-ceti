@@ -1,5 +1,10 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+const base = import.meta.env.BASE_URL;
+
+const entries = (await getCollection('entries'))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
 <Base title="Entries">
@@ -9,7 +14,17 @@ import Base from '../../layouts/Base.astro';
       <h1>Entries</h1>
       <p class="subtext">Field notes.</p>
     </header>
-    <p class="empty">DATA PENDING — transmission incomplete.</p>
+
+    <ul class="entry-list">
+      {entries.map(entry => (
+        <li>
+          <a href={`${base}entries/${entry.id}/`}>
+            <span class="entry-date">{entry.data.date.toISOString().slice(0,10).replace(/-/g,'.')}</span>
+            <span class="entry-title">{entry.data.title}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
   </div>
 </Base>
 
@@ -31,9 +46,31 @@ import Base from '../../layouts/Base.astro';
     color: var(--text-dim);
     letter-spacing: 0.06em;
   }
-  .empty {
-    font-size: 0.75rem;
+
+  .entry-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid var(--border);
+  }
+  .entry-list li { border-bottom: 1px solid var(--border); }
+  .entry-list a {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 1.1rem 0;
+    text-decoration: none;
+    color: var(--text);
+  }
+  .entry-list a:hover .entry-title { color: var(--green); }
+  .entry-date {
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
     color: var(--text-dim);
-    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+  .entry-title {
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
   }
 </style>
