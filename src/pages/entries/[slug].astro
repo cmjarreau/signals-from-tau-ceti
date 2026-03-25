@@ -22,7 +22,15 @@ const { Content } = await render(entry);
       {entry.data.description && <p class="desc">{entry.data.description}</p>}
     </header>
 
-    <div class="terminal-prose">
+    <div class="prose-toolbar">
+      <label class="toggle-switch" aria-label="Toggle light mode">
+        <input type="checkbox" id="mode-toggle" />
+        <span class="track"><span class="thumb"></span></span>
+        <span class="toggle-label">LIGHT</span>
+      </label>
+    </div>
+
+    <div class="terminal-prose" id="prose">
       <Content />
     </div>
 
@@ -36,7 +44,7 @@ const { Content } = await render(entry);
   .entry-header {
     padding-block: 3rem 2.5rem;
     border-bottom: 1px solid var(--border);
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     max-width: var(--measure);
   }
 
@@ -58,6 +66,94 @@ const { Content } = await render(entry);
     margin-top: 0.5rem;
   }
 
+  /* Toolbar */
+  .prose-toolbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 2rem;
+    max-width: var(--measure);
+  }
+
+  /* Switch */
+  .toggle-switch {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+  }
+
+  .toggle-switch input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .track {
+    position: relative;
+    display: inline-block;
+    width: 28px;
+    height: 14px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    transition: background 150ms ease, border-color 150ms ease;
+  }
+
+  .thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 8px;
+    height: 8px;
+    background: var(--text-dim);
+    border-radius: 50%;
+    transition: transform 150ms ease, background 150ms ease;
+  }
+
+  input:checked ~ .track {
+    background: #f5f2eb;
+    border-color: #ccc;
+  }
+
+  input:checked ~ .track .thumb {
+    transform: translateX(14px);
+    background: #000000;
+  }
+
+  .toggle-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    color: var(--text-dim);
+  }
+
+  /* Light mode prose */
+  .terminal-prose.light {
+    background: #f5f2eb;
+    padding: 2.5rem;
+    color: #000000 !important;
+    text-shadow: none !important;
+  }
+
+  .terminal-prose.light :global(p),
+  .terminal-prose.light :global(li) {
+    color: #000000 !important;
+    text-shadow: none !important;
+  }
+
+  .terminal-prose.light :global(h2) {
+    color: #000000 !important;
+    border-left-color: #000000 !important;
+    border-top-color: #ccc !important;
+    text-shadow: none !important;
+  }
+
+  .terminal-prose.light :global(a) {
+    color: #1a4080 !important;
+  }
+
+  /* Footer */
   .entry-footer {
     border-top: 1px solid var(--border);
     margin-top: 4rem;
@@ -66,11 +162,21 @@ const { Content } = await render(entry);
     letter-spacing: 0.1em;
   }
 
-  .entry-footer a {
-    color: var(--text-dim);
+  .entry-footer a { color: var(--text-dim); }
+  .entry-footer a:hover { color: var(--green); }
+</style>
+
+<script>
+  const toggle = document.getElementById('mode-toggle') as HTMLInputElement;
+  const prose = document.getElementById('prose');
+  let light = localStorage.getItem('entry-light') === 'true';
+
+  function apply() {
+    prose?.classList.toggle('light', light);
+    if (toggle) toggle.checked = light;
+    localStorage.setItem('entry-light', String(light));
   }
 
-  .entry-footer a:hover {
-    color: var(--green);
-  }
-</style>
+  apply();
+  toggle?.addEventListener('change', () => { light = toggle.checked; apply(); });
+</script>
